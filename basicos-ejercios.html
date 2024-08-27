@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Ejercicios de logica de programacion</h1>
+  <script>
+
+    /* ejercicio Nº1
+    1) Programa una función que cuente el número de caracteres de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá 10.
+     */
+
+    function contarCaracteres(texto = '') {
+      if (typeof texto !== 'string') return 'el valor ingresado no es una cadena de texto' //NOTA: uso el operador typeof, para que me ayude a encontrar el tipo de variable que aun no esta definifa 
+
+      if (texto === '') return 'no ha ingresado ningun valor'
+
+
+      return texto.length
+    }
+
+    console.log(contarCaracteres('HoLa MuNdO'))
+
+    //o tambien en la parte del return se puede realizar asi para una respuesta mas amigable
+
+    /*   return console.log(`la cadena de texto ${texto} tiene ${texto.length} caracteres`)
+     }
+ 
+       contarCaracteres('HoLa MuNdO') */
+
+
+
+
+    /* ejercicio Nº2
+    2) Programa una función que te devuelva el texto recortado según el número de caracteres indicados, pe. miFuncion("Hola Mundo", 4) devolverá "Hola".
+    */
+
+    function textoRecortado(texto = '', NºCaracterIndicado) {
+      if (typeof texto !== 'string') return 'el valor ingresado no es una cadena de texto'
+
+      if (texto === '') return 'no ha ingresado ningun valor'
+
+      if (typeof NºCaracterIndicado !== 'number') return 'el valor indicado no es un numero'
+
+      if (!Number.isInteger(NºCaracterIndicado)) return 'el valor indicado debe ser un numero entero'//NOTA:!Number.isInteger => verifica si el valor es diferente de un numero entero  
+
+      if (NºCaracterIndicado > texto.length) return 'el valor indicado sobrepasa los caracteres del texto'
+
+      return texto.slice(0, NºCaracterIndicado)
+    }
+
+    console.log(textoRecortado('hola', 2))
+
+
+
+
+
+    /*ejercicio Nº3
+  3) Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, pe. miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'].   
+     */
+
+    function arraySeparado(texto = '', caracterDeSeparacion) {
+
+      if (typeof texto !== 'string') return 'el valor ingresado no es una cadena de texto'
+
+      if (texto === '') return 'no ha ingresado ninfun valor'
+
+      return texto.split(caracterDeSeparacion)
+    }
+    console.log(arraySeparado('hola que tal mi nombre es', " "))
+
+
+
+
+
+    /* ejercicio Nº4
+    4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo.
+    
+    */
+
+    function repeticion(texto = '', repetirN) {
+
+      if (typeof texto !== 'string') return 'el valor ingresado no es una cadena de texto'
+
+      if (texto === '') return 'no ha ingresado ningun texto a repetir'
+
+      if (repetirN <= 0) return 'el numero de repeticiones debe ser positivo'
+
+      return texto.repeat(repetirN)
+      //tambien se puede resolver con un bucle for 
+      //for (let i = 1; i <= repetirN; i++) console.log(`${texto}, ${i}`)
+    }
+
+    console.log(repeticion('hola ', 5))
+    // repeticion('saludo', 2)
+    // console.log(repeticion('hola' + ' ', 5))
+
+
+    /* ejercicio Nº5
+    5) Programa una función que invierta las palabras de una cadena de texto, pe.miFuncion("Hola Mundo") devolverá "odnuM aloH".*/
+
+    function reves(texto = '') {
+
+      if (typeof texto !== 'string') return 'el valor ingresado no es una cadena de texto '
+
+      if (texto === '') return 'no ha ingresado ningun valor'
+
+      return texto.split('').reverse().join('')
+
+      //tambien se puede resolver con un bucle for decrementado 
+      //  for (let i = texto.length - 1; i >= 0; i--) console.log(`${texto} => ${texto[i]}`)
+    }
+    console.log(reves('hola que tal'))
+    // reves('hola')
+
+    /* NOTA:
+     se utiliza el metodo split=> para cambiar la cadena a un arreglo
+     se utiliza reves => para invertir el arreglo creado
+     se utiliza join => para volver a unir los elementos de arreglo en una cadena de texto
+     */
+
+
+
+
+
+    /*ejercicio Nº6
+    6) Programa una función para contar el número de veces que se repite una palabra en un texto largo, pe.miFuncion("hola mundo adios mundo", "mundo") devolverá 2.
+    */
+
+    function palabraRepetida(palabra = '', texto = '') {
+
+      let seRepite = 0;
+
+
+      if (typeof texto !== 'string') return 'el valor ingresado no es una cadena de texto'
+
+      if (texto === '') return 'no ha ingresado ningun texto '
+
+      if (typeof palabra !== 'string') return 'el valor ingresado a buscar no es una cadena de texto'
+
+      if (palabra === '') return 'no ha ingresado ningun valor a buscar'
+
+
+      for (let i = 0; i < texto.length; i++) {
+        if (texto.indexOf(palabra, i) != -1) {
+          seRepite++;
+
+          //para que se siga ejecutando hasta que finalice el codigo hay que colocar la siguiente sentencia
+
+          i = texto.indexOf(palabra, i) + palabra.length;
+
+          console.log(`la palabra ${palabra} se repite ${seRepite} veces en el texto`)
+        }
+      }
+    }
+    console.log(palabraRepetida('hola', 'hola don pepito, hola don jose'))
+
+
+
+
+
+
+    /*
+    ejercicio Nº7
+    7) Programa una función que valide si una palabra o frase dada, es un palíndromo(que se lee igual en un sentido que en otro), pe.mifuncion("Salas") devolverá true.
+    */
+
+    function palindromo(frase = '') {
+
+      let frase1 = frase.toLowerCase().replace(/\,*\s/ig, '') //expresion regular para quitar espacios y comas (,)
+
+      if (typeof frase !== 'string') return 'el valor introducido no es una cadena de texto'
+
+
+      if (frase === '') return 'no has introducido ninguna palabra'
+
+      return frase1.split('').reverse().join('') === frase1
+
+
+        ? `la palabra ${frase} es palindromo`
+        : `la palabra ${frase} no es palindromo`
+
+
+    }
+
+    console.log(palindromo('SalAs'))
+    console.log(palindromo('arena'))
+    console.log(palindromo('areNerA'))
+    console.log(palindromo('anita, lava la tina'))
+
+    /* ejercicio Nº8
+    8) Programa una función que elimine cierto patrón de caracteres de un texto dado, pe.miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5. */
+
+    function remplazar(texto = '', cambio = '') {
+
+      if (typeof texto !== 'string') return 'el valor ingresado, no es una cadena de texto'
+
+      if (texto === '') return 'no has ingresado ningun valor'
+
+      let buscar = new RegExp(cambio, 'ig')
+      return texto.replace(buscar, '')
+    }
+    console.log(remplazar('xyz1, xyz2, xyz3, xyz4, xyz5', 'xyz'))
+    console.log(remplazar('hola mundo, Hola personas, Hola gente', 'hola'))
+    console.log(remplazar(''))
+
+
+
+    /*ejercicio Nº9
+      9) Programa una función que obtenga un numero aleatorio entre 501 y 600. */
+
+    function generadorDeNumeros(max, min) {
+
+      if (typeof max !== 'number') return 'el valor maximo indicado no es un numero'
+
+      if (!Number.isInteger(max)) return 'el valor indicado debe ser un numero entero'//NOTA:!Number.isInteger => verifica si el valor es diferente de un numero entero  
+
+      if (typeof min !== 'number') return 'el valor minimo indicado no es un numero'
+
+      if (!Number.isInteger(min)) return 'el valor indicado debe ser un numero entero'//NOTA:!Number.isInteger => verifica si el valor es diferente de un numero entero  
+
+      return Math.floor(Math.random() * (max - min)) + min
+
+    }
+    //NOTA:
+    //se utiliza el metodo Math.floor para redondear hacia abajo
+
+    /*  for (let i = 0; i <= 100; i++) {
+       console.log(generadorDeNumeros(501, 601))
+     } */ //para verificar que si este sacando los numeros dentro del rango
+
+    console.log(generadorDeNumeros(501, 601))
+
+    /* ejercicio Nº10
+     10) Programa una función que reciba un número y evalúe si es capicúa o no(que se lee igual en un sentido que en otro), pe.miFuncion(2002) devolverá true.
+    */
+
+    function capicua(number) {
+
+      if (typeof number !== 'number') return 'el valor indicado no es un numero'
+
+      let numCapicua = number.toString() //se manda a convertir en string para poder aplicar los metodos
+
+      let capicua = numCapicua.split('').reverse().join('') //metodos
+
+      return numCapicua === capicua
+
+        ? `${number}, es capicua => ${capicua}`
+        : `${number}, no es capicua => ${capicua}`
+
+    }
+
+    console.log(capicua(2002))
+    console.log(capicua(986))
+
+
+
+
+
+
+
+    /*
+11) Programa una función que calcule el factorial de un número(El factorial de un entero positivo n, se define como el producto de todos los números enteros positivos desde 1 hasta n), pe.miFuncion(5) devolverá 120.
+*/
+
+    function factorial(numero) {
+
+      let factorial = '1'
+
+      if (typeof numero !== 'number') return 'el valor introducido no es un numero'
+
+      if (numero === 0) return `el factorial de ${numero} es ${factorial}`
+
+      if (numero < 0) return 'no se puede calcular el numero debe ser positivo'
+
+      for (i = 1; i <= numero; i++) {
+        factorial = factorial * i
+      }
+      return `el factorial de ${numero} es => ${factorial}`
+    }
+
+    console.log(factorial(0))
+    console.log(factorial(5))
+    console.log(factorial(6))
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
