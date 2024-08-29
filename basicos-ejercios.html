@@ -158,7 +158,7 @@
         }
       }
     }
-    console.log(palabraRepetida('hola', 'hola don pepito, hola don jose'))
+    console.log(palabraRepetida('hola', 'hola don pepito, hola don jose, hola mundo'))
 
 
 
@@ -255,7 +255,7 @@
 
     }
 
-    console.log(capicua(2002))
+    console.log(capicua(20.02))
     console.log(capicua(986))
 
 
@@ -270,7 +270,7 @@
 
     function factorial(numero) {
 
-      let factorial = '1'
+      let factorial = 1
 
       if (typeof numero !== 'number') return 'el valor introducido no es un numero'
 
@@ -280,6 +280,7 @@
 
       for (i = 1; i <= numero; i++) {
         factorial = factorial * i
+
       }
       return `el factorial de ${numero} es => ${factorial}`
     }
@@ -291,7 +292,92 @@
 
 
 
+    /* ejercicio Nº12
+     12) Programa una función que determine si un número es primo (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
+     */
 
+    function numeroPrimo(number) {
+
+      if (typeof number !== 'number') return `el valor  ${number}, no es un numero`
+
+      if (number <= 1) return `el valor ${number}, debe ser un numero mayor a 2`
+
+      if (number === 2) return `el numero ${number}, no es un numero primo`
+
+      if (!Number.isInteger(number)) return `el valor ${number}, debe ser un numero entero`
+
+      for (let i = 2; i < number; i++) {
+
+        console.log(`${number}/${i} = ${number % i}`)
+
+        if (number % i === 0) return `el numero ${number}, no es un numero primo `
+      }                                   //aqui se termina el ciclo for y se hace la otra validacion
+      return `el numero ${number}, SI es un numero PRIMO`
+    }
+
+    console.log(numeroPrimo(95))
+
+
+
+
+
+    /*ejercicio Nº13
+13) Programa una función que determine si un número es par o impar, pe. miFuncion(29) devolverá Impar.
+     */
+
+    function parImpar(valorParImpar) {
+
+      if (typeof valorParImpar !== 'number') return `el valor ${valorParImpar}, no es un numero, debe ingresar un numero`
+
+      if (valorParImpar < 0) return `el valor ${valorParImpar}, debe ser un numero positivo`
+
+      if (!Number.isInteger(valorParImpar)) return `el valor ${valorParImpar}, debe ser un numero entero`
+
+      return valorParImpar % 2 === 0
+
+        ? `el valor ${valorParImpar} es un numero PAR`
+        : `el valor ${valorParImpar} es un numero IMPAR`
+    }
+
+    console.log(parImpar(100))
+    console.log(parImpar(29))
+
+
+
+
+
+    /*
+    ejercicio Nº14
+    14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F.
+    */
+
+    function transformarºC_ºF(Celsius) {
+
+      if (typeof Celsius !== 'number') return `el valor ingresado no esta en grados`
+
+      let Fahrenheit = (Celsius * 9 / 5) + 32
+
+      return `en ${Celsius}ºC, hay ${Fahrenheit}ºF`
+    }
+
+    function transformarºF_ºC(Fahrenheit) {
+
+      if (typeof Fahrenheit !== 'number') return `el valor ingresado no esta en grados`
+
+      let Celsius = (Fahrenheit - 32) * 5 / 9
+
+      return `en ${Fahrenheit}ºF, hay ${Celsius}ºC`
+    }
+
+
+    console.log(transformarºC_ºF(32))
+    console.log(transformarºC_ºF(-32))
+    console.log(transformarºC_ºF(20))
+
+
+    console.log(transformarºF_ºC(89.6))
+    console.log(transformarºF_ºC(-25.6))
+    console.log(transformarºF_ºC(68))
 
 
 
