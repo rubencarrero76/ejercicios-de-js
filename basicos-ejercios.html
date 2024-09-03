@@ -315,7 +315,7 @@
       return `el numero ${number}, SI es un numero PRIMO`
     }
 
-    console.log(numeroPrimo(95))
+    console.log(numeroPrimo(85))
 
 
 
@@ -329,7 +329,7 @@
 
       if (typeof valorParImpar !== 'number') return `el valor ${valorParImpar}, no es un numero, debe ingresar un numero`
 
-      if (valorParImpar < 0) return `el valor ${valorParImpar}, debe ser un numero positivo`
+      //  if (valorParImpar < 0) return `el valor ${valorParImpar}, debe ser un numero positivo`
 
       if (!Number.isInteger(valorParImpar)) return `el valor ${valorParImpar}, debe ser un numero entero`
 
@@ -341,6 +341,7 @@
 
     console.log(parImpar(100))
     console.log(parImpar(29))
+    console.log(parImpar(-15))
 
 
 
@@ -378,6 +379,95 @@
     console.log(transformarºF_ºC(89.6))
     console.log(transformarºF_ºC(-25.6))
     console.log(transformarºF_ºC(68))
+
+
+
+
+    /* ejercicio Nº15
+    15) Programa una función para convertir números de base binaria a decimal y viceversa, pe.miFuncion(100, 2) devolverá 4 base 10.
+    */
+
+    function binarioDecimalViceversa(numero, base) {
+
+      //validaciones para el numero
+
+      if (typeof numero !== 'number') return `el valor ingresado ${numero}, no es un numero`
+
+      if (numero === undefined) return `no has ingresado ningun valor`
+
+      if (typeof base !== 'number') return `el valor ingresado en la base ${base}, no es un numero`
+
+      if (base === undefined) return `no has ingresado ningun valor en la base`
+
+      //validaciones para la base
+
+      if (base === 2) return `${numero} base ${base} = ${parseInt(numero, base)} base 10` //parseInt es un metodo que se utiliza para transformar de binario a decimal
+
+      if (base === 10) return `${numero} base ${base} = ${numero.toString(2)} base 2` //.toString es un metodo que se usa para transformar de decimal a binario
+
+      return `el numero de base ${base} a convertir no es valido`
+
+    }
+
+    console.log(binarioDecimalViceversa(100, 2))
+    console.log(binarioDecimalViceversa(4, 10))
+    console.log(binarioDecimalViceversa(101000, 2))
+    console.log(binarioDecimalViceversa(40, 10))
+
+
+    /* ejercicio N16º
+          16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe.miFuncion(1000, 20) devolverá 800. */
+
+
+    function descuento(precio, descuento) {
+
+      if (typeof precio !== 'number') return `el precio indicado ${precio}, no es un numero`
+
+      if (precio === undefined) return `el precio no ha sido indicado`
+
+      if (typeof descuento !== 'number') return `el descuento indicado no es valido`
+
+      if (descuento === undefined) return 'el descuento indicado no es valido '
+
+
+      let precioFinal = precio - ((precio * descuento) / 100)
+
+
+      return `el precio final de ${precio} con el ${descuento}% de descuento, es de ${precioFinal}`
+
+    }
+
+    console.log(descuento(1000, 20))
+    console.log(descuento(200, 50))
+
+
+
+
+    /*  ejercicio Nº17
+     17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe.miFuncion(new Date(1984, 4, 23)) devolverá 35 años(en 2020). */
+
+    function añosTrascurridos(fecha1, fecha2) {
+
+      let milisegundosAño = 24 * 60 * 60 * 1000 * 365
+
+      let milisegundosTranscurridos = Math.abs(fecha1.getTime() - fecha2.getTime()) //se utiliza el getTime para que de el resultado en milisegundos y el abs para que de el resultado positivo
+
+      let añosTrascurridos = Math.round(milisegundosTranscurridos / milisegundosAño)
+
+      return `desde ${fecha1.toLocaleDateString()}, hasta ${fecha2.toLocaleDateString()}, han pasado ${añosTrascurridos} años`//se utiliza el toLocaleDateString para que de el resultado de una forma mas amigable y lejible
+    }
+
+    fecha1 = new Date('01/01/2000')//(mes/dia/año)
+    fecha2 = new Date('01/01/2024')//(mes/dia/año)
+    console.log(añosTrascurridos(fecha1, fecha2))
+
+    fecha1 = new Date('08/02/1995')
+    fecha2 = new Date('09/03/2024')
+    console.log(añosTrascurridos(fecha1, fecha2))
+
+
+
+
 
 
 
